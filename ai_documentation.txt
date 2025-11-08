@@ -1,0 +1,141 @@
+=== AI usage log ===
+Date: 2025-11-07
+Task: HW3 
+Tool: ChatGPT (GPT-5)
+
+--> Prompts:
+- “Write a Makefile with env, html, and clean targets that work with myst build.”
+
+--> Outputs:
+# Makefile (generated with explanations)
+# === Environment Setup ===
+env:
+	@echo "Setting up or updating the conda environment..."
+	conda env update -f environment.yml --prune
+
+# === Build MyST HTML Site ===
+html:
+	@echo "Building local HTML version of the MyST website..."
+	myst build --html
+
+# === Cleanup ===
+clean:
+	@echo "Cleaning up generated folders..."
+	rm -rf figures/* audio/* _build/*
+ 
+
+--> Prompts:
+- “Give me an example for a test for test_readligo.py”
+
+--> Outputs:
+# ligotools/tests/test_readligo.py
+import numpy as np
+from ligotools import readligo
+
+# 1. loaddata should return arrays of the same length
+def test_loaddata_h1_shapes_match():
+    strain, time, meta = readligo.loaddata(
+        "data/H-H1_LOSC_4_V2-1126259446-32.hdf5",
+        'H1'
+    )
+    assert len(strain) == len(time)
+
+# 2. time should be strictly nondecreasing (monotonic)
+def test_loaddata_time_monotonic():
+    strain, time, meta = readligo.loaddata(
+        "data/H-H1_LOSC_4_V2-1126259446-32.hdf5",
+        'H1'
+    )
+    # check that differences are >= 0
+    diffs = np.diff(time)
+    assert (diffs >= 0).all()
+
+--> Prompts:
+- "Should i also write one test for the plot_match_results? or that is fine."
+
+--> Outputs:
+You don’t have to write a test for plot_match_results() unless your instructor or rubric explicitly asks for it.
+🧠 Why it’s usually excluded
+plot_match_results() produces figures, not numeric output — and pytest is generally meant for checking data correctness, not visual correctness.
+Testing plots would require either:
+
+checking that the function runs without errors (no exceptions), or
+
+verifying that the figure object exists (not the actual plot content).
+
+Those are much less important than testing math or I/O functions.
+
+--> Prompts:
+-"Now i want to refine this page, help me write more delicate structures for the yml file."
+
+--> Outputs:
+# See docs: https://mystmd.org/guide/frontmatter
+version: 1
+
+project:
+  id: 09348f47-59ad-41aa-a35a-e709c201ff59
+  title: STAT 159 – HW 3 LIGO
+  description: >
+    Homework 3 for STAT 159/259: reorganizing the LIGO GW tutorial into a
+    research-style repo, adding tests, packaging, and documentation.
+  date: 2025-11-07
+  author:
+    - name: Riley Yu
+      affiliation: UC Berkeley, Department of Statistics
+  github: https://github.com/UCB-stat-159-f25/hw3-rileyyu777
+  binder: https://mybinder.org/v2/gh/UCB-stat-159-f25/hw3-rileyyu777/HEAD?labpath=LOSC_Event_tutorial.ipynb
+
+site:
+  template: book-theme
+  options:
+    # what shows up in the left sidebar
+    toc:
+      - file: README.md
+        title: Homework 3 – From Notebooks to Research Packages
+      - file: LOSC_Event_tutorial.ipynb
+        title: Binary Black Hole Signals in LIGO Open Data
+    # little things in the header
+    navbar:
+      # shows the GitHub icon
+      github: true
+      # shows the download icon
+      download: true
+    # optional footer text
+    footer: "STAT 159/259 · UC Berkeley"
+
+--> Prompts: 
+-"why there is a egg-info?"
+
+--> Outputs:
+Excellent question — that ligotools.egg-info/ folder appears automatically when you installed your local Python package (the ligotools package) inside your repo.
+
+Here’s what’s happening:
+
+🧩 What ligotools.egg-info Is
+
+When you ran:
+
+pip install -e .
+
+
+(or anything that builds your package), Python’s packaging system (setuptools) generated this ligotools.egg-info folder.
+
+It’s basically metadata about your package, such as:
+
+What files belong to it (SOURCES.txt)
+
+What dependencies it lists (requires.txt)
+
+The name, version, etc. (PKG-INFO)
+
+The “top-level” package path
+
+It’s how Python keeps track of your local editable install.
+
+🧹 Should You Keep It in GitHub?
+
+❌ No — you don’t need to keep it in your repository.
+
+These .egg-info directories are auto-generated build artifacts, like .pyc files or __pycache__/.
+They should be ignored by Git.
+
