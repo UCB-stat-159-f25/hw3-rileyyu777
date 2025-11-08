@@ -1,6 +1,5 @@
 # STAT 159 – HW 3 LIGO
 **Binary Black Hole Signals in LIGO Open Data**
-**Author:** Riley Yu  
 
 This repository contains Homework 3 for *Statistics 159 (Fall 2025)* at UC Berkeley.  
 In this assignment, we transformed research notebooks into a reproducible Python package and MyST website.  
