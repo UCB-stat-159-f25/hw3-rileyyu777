@@ -4,8 +4,10 @@ version: 1
 project:
   id: 09348f47-59ad-41aa-a35a-e709c201ff59
   title: STAT 159 – HW 3 LIGO
+  author:
+    - name: Riley Yu
+      affiliation: UC Berkeley, Department of Statistics
   date: 2025-11-07
-  author: Riley Yu
   github: https://github.com/UCB-stat-159-f25/hw3-rileyyu777
   binder: https://mybinder.org/v2/gh/UCB-stat-159-f25/hw3-rileyyu777/HEAD?labpath=LOSC_Event_tutorial.ipynb
 
@@ -15,5 +17,3 @@ site:
     toc:
       - file: README.md
       - file: LOSC_Event_tutorial.ipynb
-    exclude:
-      - hw03_description.md
