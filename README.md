@@ -20,6 +20,7 @@ Click the button below to launch this repository in the Binder environment:
 - `data/`, `audio/`, `figures/`: folders for input/output files
 - `LOSC_Event_tutorial.ipynb`: main analysis notebook
 - `myst.yml`: configuration file for the MyST site
+- `Makefile`: automates environment setup, HTML site building, and cleanup tasks  
 - `README.md`: this file
 - `ai_documentation.txt`: record of AI tool usage for the assignment
 
